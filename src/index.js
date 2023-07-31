@@ -1,13 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css'; //bootstrap need to import here
+import {
+  LoginPage,
+  HomePage
+} from "./page"
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element:<Navigate to="/home" />
+  },
+  {
+    path: "/login",
+    element: <LoginPage/>,
+  },
+  {
+    path: "/home",
+    element: <HomePage/>,
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+      <RouterProvider router={router} />
   </React.StrictMode>
 );
 
