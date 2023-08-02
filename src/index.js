@@ -16,7 +16,7 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<Navigate to="/home" />
+    element:<Navigate to="/login" />
   },
   {
     path: "/login",
