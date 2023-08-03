@@ -12,6 +12,13 @@ import {
   RouterProvider,
   Navigate
 } from "react-router-dom";
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducer from './redux/reducer/index';
+import { Provider } from 'react-redux';
+
+
+const store = createStore(reducer, applyMiddleware(thunk));
 
 const router = createBrowserRouter([
   {
@@ -30,9 +37,9 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <>
+  <Provider store={store}>
     <RouterProvider router={router} />
-  </>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

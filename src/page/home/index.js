@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { TableComponent } from '../../component';
 import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPosts } from '../../redux/action';
 
 const HomePage = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const param1 = queryParams.get('email');
+  const { loading, dataTable, error } = useSelector((state) => state.Data);
+  console.log(dataTable,"dataTable");
 
   const [data, setData] = useState("data")
   const [dataRow, setDataRow] = useState([
@@ -15,9 +20,9 @@ const HomePage = () => {
     // Add more objects as needed
   ])
   const tableCol = [
-    { column: 'no', field: 'no' },
-    { column: 'nama', field: 'name' },
-    { column: 'kelas', field: 'class' },
+    { column: 'id', field: 'id' },
+    { column: 'email', field: 'email' },
+    { column: 'first name', field: 'first_name' },
     // { column: 'action', field: 'id' },
   ]
 
@@ -29,6 +34,11 @@ const HomePage = () => {
     setData(params)
   }
 
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, []);
+  
+
   return (
     < div className='container pt-5 vh-100'>
       <div className='h1 text-primary '>{data}</div>
@@ -39,7 +49,7 @@ const HomePage = () => {
       add
     </button>
       <div className='text-danger'>email: {param1}</div>
-      <TableComponent column={tableCol} row={dataRow} />
+      <TableComponent column={tableCol} row={dataTable} />
     </div>
 
   )

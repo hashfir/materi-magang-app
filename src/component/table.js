@@ -5,7 +5,6 @@ const TableComponent = (props) => {
     row,
     column
   } = props
-  console.log(row,"itemitem");
   return (
     <div className="container mt-5">
     <table className="table table-bordered">
